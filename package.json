@@ -4,13 +4,8 @@
   "description": "collections of functions, classes, etc that are generally useful",
   "main": "index.js",
   "scripts": {
-    "start": "npm run dev-will-save",
-    "dev": "npm run dev-no-save",
-
-    "transpile": "tsc -p ./dist",
-
-    "test": "npm run testing-with-mocha",
-    "testing-with-mocha": "mocha -r chai/register-expect src/tests/*.test.ts"    
+    "transpile": "tsc",
+    "test": "mocha"    
   },
   "author": "martingullbrandssonmoreira@hotmail.com",
   "license": "ISC",
