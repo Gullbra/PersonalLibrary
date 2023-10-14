@@ -75,3 +75,24 @@ export const mapFromArrays = <T,U>(arrKeys: T[], arrValues: U[]): Map<T, U> => {
     new Map<T, U>()
   )
 }
+
+/**
+ * Wraps function inside a promise so that, when it's called, it resolves after a specified amount of milliseconds after it was last called.
+ * @param func to be wrapped.
+ * @param waitFor milliseconds before resolve.
+ * @returns a wrapped, callable, function.
+ * @see https://gist.github.com/ca0v/73a31f57b397606c9813472f7493a940
+ */
+export const debounceWrapper = <F extends (...args: any[]) => any>(func: F, waitFor: number = 1000) => {
+  let timeout: NodeJS.Timeout
+
+  return (...args: Parameters<F>): Promise<ReturnType<F>> => (
+    new Promise(resolve => {
+      if (timeout) {
+        clearTimeout(timeout)
+      }
+
+      timeout = setTimeout(() => resolve(func(...args)), waitFor)
+    })
+  )
+}
