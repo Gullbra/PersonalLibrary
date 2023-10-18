@@ -51,12 +51,6 @@ export const randomizeArrayElement = <T,>(arr: T[]): T => {
 }
 
 /**
- * Creates and returns a Set from an array.
- * @param arr Array.
- */
-export const setFromArray = <T,>(arr: T[]): Set<T> => arr.reduce((prev, curr) => prev.add(curr), new Set<T>())
-
-/**
  * Creates and returns a Map from two arrays of the same size. Throws an error when the arrays aren't of the same size.
  * @param arrKeys Will be converted into Map-keys.
  * @param arrValues Will be converted into Map-values.
