@@ -6,10 +6,13 @@ export const capitalizeWord = (word: string): string =>  word.length === 0 ? wor
 
 /**
  * Capitalizes sentence.
- * @param filters Optional array of words to exclude from capitalization. Casesensitive.
+ * @param filters Optional iterable of strings to exclude from capitalization. Casesensitive.
  */
-export const capitalizeSentence = (sentence: string, filters?: string[]): string => {
-  return !filters
-    ? sentence.split(' ').map(capitalizeWord).join(' ')
-    : sentence.split(' ').map((word) => filters.includes(word) ? word : capitalizeWord(word)).join(' ')
+export const capitalizeSentence = (sentence: string, filters?: Iterable<string>): string => {
+  if(!filters)
+    return sentence.split(' ').map(capitalizeWord).join(' ');
+
+  const filterSet: Set<string> = filters instanceof Set ? filters : new Set(filters) 
+
+  return sentence.split(' ').map((word) => filterSet.has(word) ? word : capitalizeWord(word)).join(' ')
 }

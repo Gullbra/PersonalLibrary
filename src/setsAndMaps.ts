@@ -9,11 +9,13 @@ interface SetExpandedDev<T> extends Set<T>{
   hasAll(iterable: Iterable<T>): boolean
 }
 export class SetExpanded<T> extends Set<T> implements SetExpandedDev<T> {
+  /** Appends a all elements of a specified iterable to the end of the Set. */
   addAll(iterable: Iterable<T>): void {
     for (let el of iterable)
       this.add(el);
   }
   
+  /** @returns a boolean indicating whether one or more elements in a specified iterable also exists in the Set or not. */
   hasAny(iterable: Iterable<T>): boolean {
     for (let el of iterable)
       if (super.has(el))
@@ -22,12 +24,34 @@ export class SetExpanded<T> extends Set<T> implements SetExpandedDev<T> {
     return false;
   }
   
+  /** @returns a boolean indicating whether all elements in a specified iterable also exists in the Set or not. */
   hasAll(iterable: Iterable<T>): boolean {
     for (let el of iterable)
       if (!super.has(el))
         return false;
 
-    return true
+    return true;
+  }
+}
+
+
+export class MapExpanded<K,V> extends Map<K,V> {
+  /** @returns a boolean indicating whether one or more elements in a specified iterable also exists in the Map as a key. */
+  hasAny(iterable: Iterable<K>): boolean {
+    for (let el of iterable)
+      if (super.has(el))
+        return true;
+
+    return false;
+  }
+  
+  /** @returns a boolean indicating whether all elements in a specified iterable also exists in the Map as a key. */
+  hasAll(iterable: Iterable<K>): boolean {
+    for (let el of iterable)
+      if (!super.has(el))
+        return false;
+
+    return true;
   }
 }
 
