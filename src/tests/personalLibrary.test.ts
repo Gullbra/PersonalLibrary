@@ -63,6 +63,19 @@ describe('SetExpanded', () => {
       expect(testInstence.hasAny(["6", false])).to.be.false
     })
   })
+
+  describe.only('.toggle', () => {
+    const testInstence = new SetExpanded([1, "5", true])
+
+    it('should delete if already in set', () => {
+      testInstence.toggle(1)
+      expect(testInstence.has(1)).to.be.false
+    })
+    it('should add if not in set', () => {
+      testInstence.toggle(10)
+      expect(testInstence.has(10)).to.be.true
+    })
+  })
 })
 
 

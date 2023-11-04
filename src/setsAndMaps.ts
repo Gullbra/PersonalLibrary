@@ -32,6 +32,12 @@ export class SetExpanded<T> extends Set<T> implements SetExpandedDev<T> {
 
     return true;
   }
+
+  /** removes the value if it exists in the set, otherwise it adds the value to the set */
+  toggle(value: T): void {
+    if (!this.delete(value))
+      this.add(value)
+  }
 }
 
 
